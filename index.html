@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Logviewer by abcsun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Logviewer</h1>
+      <h2 class="project-tagline">Laravel/Lumen LogViewer</h2>
+      <a href="https://github.com/abcsun/LogViewer" class="btn">View on GitHub</a>
+      <a href="https://github.com/abcsun/LogViewer/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/abcsun/LogViewer/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="logviewer-for-laravel-lumen" class="anchor" href="#logviewer-for-laravel-lumen" aria-hidden="true"><span class="octicon octicon-link"></span></a>LogViewer for Laravel/ Lumen</h1>
+
+<p>本项目基于 <a href="https://github.com/BootstrapCMS/LogViewer">Laravel LogViewer</a>开发，源项目为laravel开发，支持以日期方式读取查看log文件。在此基础上增加了Lumen LogViewer，用于查看lumen.log文件，同时增加了本地bootstrap和Jquery源，防止被墙：）</p>
+
+<h3>
+<a id="lumen使用帮助" class="anchor" href="#lumen%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lumen使用帮助</h3>
+
+<h4>
+<a id="安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
+
+<ul>
+<li>使用<code>composer requirean</code>安装</li>
+<li>增加logviewer路由组
+<pre>
+$app-&gt;group(['namespace' =&gt; 'GrahamCampbell\LogViewer\Http\Controllers'], function ($app) {
+$app-&gt;get('/logviewer/lumen/show', ['as' =&gt; 'logviewer.lumen.show', 'uses' =&gt; 'LogViewerController@getLumenShow']);
+$app-&gt;get('/logviewer/lumen/delete', ['as' =&gt; 'logviewer.lumen.delete', 'uses' =&gt; 'LogViewerController@getLumenDelete']);
+$app-&gt;get('/logviewer/lumen/{level}', ['as' =&gt; 'logviewer.lumen.data', 'uses' =&gt; 'LogViewerController@getLumenData']);
+});
+</pre>
+</li>
+<li>复制本组件中的assets/logviewer文件夹到主项目的public/assets下</li>
+<li>使用http://youdomain/logviewer/lumen/show查看日志文件</li>
+</ul>
+
+<p>使用截图如下
+<img src="http://i4.tietuku.com/fc6a62d361eaeda2.png" alt=""></p>
+
+<h3>
+<a id="laravel使用帮助" class="anchor" href="#laravel%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Laravel使用帮助</h3>
+
+<p>Laravel LogViewer was created by, and is maintained by <a href="https://github.com/GrahamCampbell">Graham Campbell</a>, and provides a LogViewer admin module for <a href="http://laravel.com">Laravel 5</a>. Feel free to check out the <a href="https://github.com/BootstrapCMS/LogViewer/releases">releases</a>, <a href="LICENSE">license</a>, and <a href="CONTRIBUTING.md">contribution guidelines</a>.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><a href="https://php.net">PHP</a> 5.5+ or <a href="http://hhvm.com">HHVM</a> 3.6+, and <a href="https://getcomposer.org">Composer</a> are required.</p>
+
+<p>To get the latest version of Laravel LogViewer, simply add the following line to the require block of your <code>composer.json</code> file:</p>
+
+<pre><code>"graham-campbell/logviewer": "~1.0"
+</code></pre>
+
+<p>You'll then need to run <code>composer install</code> or <code>composer update</code> to download it and have the autoloader updated.</p>
+
+<p>Once Laravel LogViewer is installed, you need to register the service provider. Open up <code>config/app.php</code> and add the following to the <code>providers</code> key.</p>
+
+<ul>
+<li><code>'GrahamCampbell\LogViewer\LogViewerServiceProvider'</code></li>
+</ul>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>Laravel LogViewer supports optional configuration.</p>
+
+<p>To get started, you'll need to publish all vendor assets:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ php artisan vendor:publish</pre></div>
+
+<p>This will create a <code>config/logviewer.php</code> file in your app that you can modify to set your configuration. Also, make sure you check for changes to the original config file in this package between releases.</p>
+
+<p>There are two config options:</p>
+
+<h5>
+<a id="middleware" class="anchor" href="#middleware" aria-hidden="true"><span class="octicon octicon-link"></span></a>Middleware</h5>
+
+<p>This option (<code>'middleware'</code>) defines the middleware to be put in front of the endpoints provided by this package. A common use will be for your own authentication middleware. The default value for this setting is <code>[]</code>.</p>
+
+<h5>
+<a id="per-page" class="anchor" href="#per-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Per Page</h5>
+
+<p>This option (<code>'per_page'</code>) defines defines how many log entries are displayed per page. The default value for this setting is <code>20</code>.</p>
+
+<h5>
+<a id="layout" class="anchor" href="#layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layout</h5>
+
+<p>This option (<code>'layout'</code>) defines the layout to extend when building views. The default value for this setting is <code>'layouts.default'</code>.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Laravel LogViewer is designed to work with <a href="https://github.com/BootstrapCMS/CMS">Bootstrap CMS</a>. In order for it to work in any Laravel application, you must ensure that you know how to use my <a href="https://github.com/GrahamCampbell/Laravel-Core">Laravel Core</a> package as configuration and knowledge of the <code>app:install</code> and <code>app:update</code> commands is required.</p>
+
+<p>Laravel LogViewer will register four routes. The only one of interest to you is <code>'logviewer'</code> (<code>logviewer.index</code>) as it will be the main entry point for the use of this package. You can checkout the other three routes in the <a href="https://github.com/BootstrapCMS/LogViewer/blob/master/src/routes.php">source</a> if you must.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Laravel LogViewer is licensed under <a href="LICENSE">The MIT License (MIT)</a>.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/abcsun/LogViewer">Logviewer</a> is maintained by <a href="https://github.com/abcsun">abcsun</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
