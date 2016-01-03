@@ -1,7 +1,7 @@
 {
     "name": "abcsun/logviewer",
     "description": "LogViewer Provides A LogViewer Admin Module For Laravel/Lumen 5",
-    "keywords": ["laravel", "lumen" "framework", "log viewer", "LogViewer", "logviewer", "LogViewer", "Laravel LogViewer", "Laravel-LogViewer", "Graham Campbell", "GrahamCampbell"],
+    "keywords": ["laravel", "lumen", "framework", "log viewer", "LogViewer", "logviewer", "LogViewer", "Laravel LogViewer", "Laravel-LogViewer", "Graham Campbell", "GrahamCampbell"],
     "license": "MIT",
     "authors": [
         {
