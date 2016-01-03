@@ -1,18 +1,26 @@
-Laravel LogViewer
+LogViewer for Laravel/ Lumen
 =================
+本项目基于 [Laravel LogViewer](https://github.com/BootstrapCMS/LogViewer)开发，源项目为laravel开发，支持以日期方式读取查看log文件。在此基础上增加了Lumen LogViewer，用于查看lumen.log文件，同时增加了本地bootstrap和Jquery源，防止被墙：）
 
+###Lumen使用帮助
+####安装
+- 使用`composer requirean`安装
+- 增加logviewer路由组
+<pre>
+$app->group(['namespace' => 'GrahamCampbell\LogViewer\Http\Controllers'], function ($app) {
+  $app->get('/logviewer/lumen/show', ['as' => 'logviewer.lumen.show', 'uses' => 'LogViewerController@getLumenShow']);
+  $app->get('/logviewer/lumen/delete', ['as' => 'logviewer.lumen.delete', 'uses' => 'LogViewerController@getLumenDelete']);
+  $app->get('/logviewer/lumen/{level}', ['as' => 'logviewer.lumen.data', 'uses' => 'LogViewerController@getLumenData']);
+});
+</pre>
+- 复制本组件中的assets/logviewer文件夹到主项目的public/assets下
+- 使用http://youdomain/logviewer/lumen/show查看日志文件
+
+使用截图如下
+![](http://i4.tietuku.com/fc6a62d361eaeda2.png)
+
+###Laravel使用帮助
 Laravel LogViewer was created by, and is maintained by [Graham Campbell](https://github.com/GrahamCampbell), and provides a LogViewer admin module for [Laravel 5](http://laravel.com). Feel free to check out the [releases](https://github.com/BootstrapCMS/LogViewer/releases), [license](LICENSE), and [contribution guidelines](CONTRIBUTING.md).
-
-![Laravel LogViewer](https://cloud.githubusercontent.com/assets/2829600/4432324/c1921e52-468c-11e4-9fad-aec94401e69d.PNG)
-
-<p align="center">
-<a href="https://travis-ci.org/BootstrapCMS/LogViewer"><img src="https://img.shields.io/travis/BootstrapCMS/LogViewer/master.svg?style=flat-square" alt="Build Status"></img></a>
-<a href="https://scrutinizer-ci.com/g/BootstrapCMS/LogViewer/code-structure"><img src="https://img.shields.io/scrutinizer/coverage/g/BootstrapCMS/LogViewer.svg?style=flat-square" alt="Coverage Status"></img></a>
-<a href="https://scrutinizer-ci.com/g/BootstrapCMS/LogViewer"><img src="https://img.shields.io/scrutinizer/g/BootstrapCMS/LogViewer.svg?style=flat-square" alt="Quality Score"></img></a>
-<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></img></a>
-<a href="https://github.com/BootstrapCMS/LogViewer/releases"><img src="https://img.shields.io/github/release/BootstrapCMS/LogViewer.svg?style=flat-square" alt="Latest Version"></img></a>
-</p>
-
 
 ## Installation
 
