@@ -60,8 +60,8 @@ class Filesystem
      */
     protected function path($date)
     {
-        $path = $this->path.'/laravel-'.$date.'.log';
-
+        // Lumen的日志默认全部记录在lumen.log中
+        $path = ($date == 'lumen') ? $this->path.'/lumen.log' : $this->path.'/laravel-'.$date.'.log';
         if ($this->files->exists($path)) {
             return realpath($path);
         }

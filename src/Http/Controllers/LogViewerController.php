@@ -64,7 +64,7 @@ class LogViewerController extends Controller
         if (Session::has('success') || Session::has('error')) {
             Session::reflash();
         }
-
+        return redirect()->route('logviewer.show');
         return Redirect::to('logviewer/'.$today.'/all');
     }
 
@@ -150,5 +150,76 @@ class LogViewerController extends Controller
         }
 
         return View::make('logviewer::data', compact('paginator', 'log'));
+    }
+
+    public function getLumenShow($level = null)
+    {
+        $logs = LogViewer::logs();
+
+        if (!is_string($level)) {
+            $level = 'all';
+        }
+
+        $page = Input::get('page');
+        if (empty($page)) {
+            $page = '1';
+        }
+
+        $data = [
+            'logs'       => array('lumen'),
+            'date'       => 'lumen',
+            'url'        => 'logviewer',
+            // 'data_url'   => URL::route('logviewer.lumen.data').'?page='.$page,
+            'data_url'   => '/logviewer/lumen/'.$level.'?page='.$page,
+            'levels'     => LogViewer::levels(),
+            'current'    => $level,
+        ];
+
+        return View::make('logviewer::lumen-show', $data);
+    }
+    /**
+     * lumen日志查看
+     * @return [type] [description]
+     */
+    public function getLumenData($level){
+        if(!in_array($level, LogViewer::levels()) && ($level != 'all')){
+            return response()->json(['code'=>0, 'result'=>'', 'msg'=>'异常的日志等级']);
+        }
+        // $level = 'all';
+
+        $data = LogViewer::data('lumen', $level);
+        $paginator = new Paginator($data, $this->perPage);
+
+        $path = (new \ReflectionClass($paginator))->getProperty('path');
+        $path->setAccessible(true);
+        $path->setValue($paginator, URL::route('logviewer.lumen.show'));
+
+        if (count($data) > $paginator->perPage()) {
+            $log = array_slice($data, $paginator->firstItem() - 1, $paginator->perPage());
+        } else {
+            $log = $data;
+        }
+        // return response()->json(['code'=>1, 'result'=>compact('paginator', 'log', 'view'), 'msg'=>'获取成功']);
+        return View::make('logviewer::data', compact('paginator', 'log'));
+    }
+
+    /**
+     * Delete the lumen.log.
+     *
+     * @param string $date
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLumenDelete($date = 'lumen')
+    {
+        try {
+            LogViewer::delete($date);
+            
+            return redirect()->route('logviewer.lumen.show')
+                ->with('success', 'Log deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('logviewer.lumen.show')
+                ->with('error', 'There was an error while deleting the log.');
+        }
     }
 }

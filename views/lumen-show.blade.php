@@ -2,7 +2,7 @@
 
 @section('top')
 <div class="page-header">
-<h1>LogViewer</h1>
+<h1>LogViewer for Laravel/Lumen</h1>
 </div>
 @stop
 
@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-pills">
-                <li class="{{ $current === null || $current === 'all' ? 'active' : ''}}"><a href="{{ Request::root() }}/{{ $url.'/'.$date.'/all' }}">All</a></li>
+                <li class="{{ $current === null || $current === 'all' ? 'active' : ''}}"><a href="{{ Request::root() }}/{{ $url.'/'.$date.'/show' }}">All</a></li>
                 @foreach ($levels as $level)
-                    <li class="{{ $current === $level ? 'active' : '' }}"><a href="{{ Request::root() }}/{{ $url.'/'.$date.'/'.$level }}">{{ ucfirst($level) }}</a></li>
+                    <li class="{{ $current === $level ? 'active' : '' }}"><a href='#' onclick='getData(this, "{{$level}}");'>{{ ucfirst($level) }}</a></li>
                 @endforeach
                 <li class="pull-right">
                     <button data-toggle="modal" data-target="#delete_modal" id="btn-delete" type="button" class="btn btn-danger">Delete current log</button>
@@ -23,7 +23,7 @@
     </div>
     <br>
     <div class="row">
-    @if($logs)
+    
         <div class="col-lg-3">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-primary">
@@ -35,7 +35,7 @@
                             <ul class="nav nav-list">
                                 @foreach ($logs as $file)
                                      <li class="list-group-item">
-                                        <a href="{{ Request::root() }}/{{ $url.'/'.$file.'/all' }} ">{{ $file }}</a>
+                                        <a href="{{ Request::root() }}/{{ $url.'/'.$file.'/show' }} ">{{ $file }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -51,11 +51,7 @@
                 </div>
             </div>
         </div>
-    @else
-        <div class="col-lg-12">
-            <div class="alert alert-danger"><p class="lead">There are no logs!</p></div>
-        </div>
-    @endif
+    
     </div>
 </div>
 <div id="delete_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -70,7 +66,7 @@
                 <p>Are you sure you wish to continue?</p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-success" href="{{ $url.'/'.$date.'/delete' }}">Yes</a>
+                <a class="btn btn-success" href="{{ '/logviewer/lumen/delete' }}">Yes</a>
                 <button class="btn btn-danger" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -79,13 +75,35 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/styles/logviewer.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/logviewer/styles/logviewer.css') }}">
 @endsection
 
 @section('js')
 <script>
 var laravelLogViewerURL = '{{ $data_url }}';
-alert(laravelLogViewerURL);
+
+function getData(obj, level){
+    var _self = $(obj);
+    $.ajax({
+        type : "get",
+        url : "/logviewer/lumen/" + level,
+        dataType : "html",
+        data: {
+            key: $("#key").val(),
+        },
+        success : function(data, status, xhr){
+            console.log(data);
+            $('.nav-pills li').removeClass('active');
+            _self.closest('li').addClass('active');
+            var area = $('#data');
+            area.fadeOut(200, function() {
+                area.html(data);
+                area.fadeIn(200);
+            });
+            // alert(json.result);
+        },
+    });
+}
 </script>
-<script type="text/javascript" src="{{ asset('assets/scripts/logviewer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/logviewer/scripts/logviewer.js') }}"></script>
 @endsection
