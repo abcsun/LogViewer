@@ -1,12 +1,19 @@
 {
-    "name": "graham-campbell/logviewer",
-    "description": "LogViewer Provides A LogViewer Admin Module For Laravel 5",
-    "keywords": ["laravel", "framework", "log viewer", "LogViewer", "logviewer", "LogViewer", "Laravel LogViewer", "Laravel-LogViewer", "Graham Campbell", "GrahamCampbell"],
+    "name": "abcsun/logviewer",
+    "description": "LogViewer Provides A LogViewer Admin Module For Laravel/Lumen 5",
+    "keywords": ["laravel", "lumen" "framework", "log viewer", "LogViewer", "logviewer", "LogViewer", "Laravel LogViewer", "Laravel-LogViewer", "Graham Campbell", "GrahamCampbell"],
     "license": "MIT",
     "authors": [
         {
             "name": "Graham Campbell",
-            "email": "graham@alt-three.com"
+            "email": "graham@alt-three.com",
+            "role": "Original Developer"
+        },
+        {
+            "name": "abcsun",
+            "email": "chenglongsun_nj@163.com",
+            "role": "Developer",
+            "homepage": "http://github.com/abcsun"
         }
     ],
     "require": {
