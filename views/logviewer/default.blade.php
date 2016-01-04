@@ -6,14 +6,14 @@
 <title>LogViewer for Laravel/Lumen - @section('title')
 @show</title>
 
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/logviewer/styles/bootstrap.default.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('assets/logviewer/styles/bootstrap.default.min.css') }}">
 <!--[if lt IE 9]>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<script type="text/javascript" src="{{ asset('assets/logviewer/scripts/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/logviewer/scripts/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('assets/logviewer/scripts/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('assets/logviewer/scripts/bootstrap.min.js') }}"></script>
 
 </head>
 <body>
