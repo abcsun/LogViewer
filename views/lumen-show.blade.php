@@ -1,4 +1,4 @@
-@extends('logviewer::default')
+@extends('logviewer.default')
 
 @section('top')
 <div class="page-header">
@@ -75,7 +75,7 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/logviewer/styles/logviewer.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('assets/logviewer/styles/logviewer.css') }}">
 @endsection
 
 @section('js')
@@ -105,5 +105,5 @@ function getData(obj, level){
     });
 }
 </script>
-<script type="text/javascript" src="{{ asset('assets/logviewer/scripts/logviewer.js') }}"></script>
+<script type="text/javascript" src="{{ url('assets/logviewer/scripts/logviewer.js') }}"></script>
 @endsection
