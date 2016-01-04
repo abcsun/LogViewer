@@ -52,5 +52,4 @@ return [
 
     'layout' => 'layouts.default',
 
-    'log_path' => '/home/vagrant/projects/lumen51/storage/logs',
 ];

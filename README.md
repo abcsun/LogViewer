@@ -5,6 +5,8 @@ LogViewer for Laravel/ Lumen
 ###Lumen使用帮助
 ####安装
 - 使用`composer require abcsun/logviewer`安装
+- 注册Lumen服务`$app->register(GrahamCampbell\LogViewer\LogViewerLumenServiceProvider::class);
+`
 - 增加logviewer路由组
 <pre>
 $app->group(['namespace' => 'GrahamCampbell\LogViewer\Http\Controllers'], function ($app) {
@@ -13,7 +15,8 @@ $app->group(['namespace' => 'GrahamCampbell\LogViewer\Http\Controllers'], functi
   $app->get('/logviewer/lumen/{level}', ['as' => 'logviewer.lumen.data', 'uses' => 'LogViewerController@getLumenData']);
 });
 </pre>
-- 复制本组件中的assets/logviewer文件夹到主项目的public/assets下
+- 复制本组件中的样式文件夹assets/logviewer（安装后一般位于vendor/abcsun/logviewer/assets/logviewer）文件夹到主项目的public/assets下
+- 复制本组件中的blade模板文件夹views/logviewer（安装后一般位于vendor/abcsun/logviewer/views/logviewer）文件夹到主项目的resources/views下
 - 使用http://youdomain/logviewer/lumen/show查看日志文件
 
 使用截图如下

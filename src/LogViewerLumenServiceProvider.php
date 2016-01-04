@@ -116,7 +116,7 @@ class LogViewerLumenServiceProvider extends ServiceProvider
     {
         $this->app->singleton('logviewer.filesystem', function ($app) {
             $files = $app['files'];
-            $path = Config('logviewer.log_path');//$app['path.storage'].'/logs';
+            $path = __DIR__.'/../../../../storage/logs';//$app['path.storage'].'/logs';
 
             return new Filesystem($files, $path);
         });
