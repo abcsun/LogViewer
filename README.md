@@ -4,7 +4,7 @@ LogViewer for Laravel/ Lumen
 
 ###Lumen使用帮助
 ####安装
-- 使用`composer requirean`安装
+- 使用`composer require abcsun/logviewer`安装
 - 增加logviewer路由组
 <pre>
 $app->group(['namespace' => 'GrahamCampbell\LogViewer\Http\Controllers'], function ($app) {
